@@ -36,7 +36,7 @@ Get composer, install, and make sure the `cache/` folder is writeable.
 Unless specified otherwise (in third-party vendor libraries), this is public domain.
 
 
-* [PHP] https://www.php.net
-* [Silex] http://silex.sensiolabs.org
-* [Twig] http://twig.sensiolabs.org
-* [Markdown] https://wikipedia.org/wiki/Markdown
+[PHP]: https://www.php.net
+[Silex]: http://silex.sensiolabs.org
+[Twig]: http://twig.sensiolabs.org
+[Markdown]: https://wikipedia.org/wiki/Markdown
