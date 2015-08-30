@@ -12,6 +12,7 @@ It is written in [PHP] and is powered by [Silex], [Twig], and [Markdown].
 
 # HOW TO
 
+
 ## USE
 
 Just edit the pages in the `pages/` folder. You can use markdown syntax and simple html tags.
@@ -19,6 +20,16 @@ The "page XX" text will be replaced by links automagically.
 
 - `web/index.php` contains most of the PHP glue.
 - `view/` contains the html templates.
+
+To run the website locally, simply go into the `web/` directory, and launch PHP's server :
+
+```
+$ cd web
+$ php -S localhost:3000
+```
+
+Then, you can browse [http://localhost:3000](http://localhost:3000).
+
 
 ## INSTALL
 
