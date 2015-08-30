@@ -75,6 +75,9 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
     // Add page links
     $page = preg_replace('!page (\d+)!', '<a href="../page/$1">$0</a>', $page);
 
+    // Add conversation links
+    $page = preg_replace('!\s*\((\d+)\)\s*>\s*(.+)$!m', '&gt; <a class="talk" href="../page/$1">$2</a><br>', $page);
+
     return $twig->render('page.html.twig', array('page' => $page));
 
 })->assert('id', '\d+');

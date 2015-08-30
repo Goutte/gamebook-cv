@@ -44,7 +44,13 @@ a:hover {
     color: #ff6600;
 }
 a:visited {
-    color: purple;
+    color: #4d00ff;
+}
+a:visited:hover {
+    color: #b24700;
+}
+a.talk {
+    text-decoration: none;
 }
 ul, ol {
     padding: 0;
