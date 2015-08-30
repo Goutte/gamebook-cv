@@ -1,0 +1,9 @@
+{
+    "require": {
+         "silex/silex":          "1.*"
+        ,"symfony/finder":       "2.*"
+        ,"michelf/php-markdown": "1.*"
+        ,"twig/twig":            "1.*"
+    },
+    "minimum-stability": "stable"
+}

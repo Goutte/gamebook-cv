@@ -1,0 +1,16 @@
+# Dolphin
+.directory
+
+# Jetbrains
+.idea/*
+
+# Apple
+.DS_Store
+
+# Silex
+cache/*
+vendor/*
+
+# Composer
+composer.phar
+composer.lock
