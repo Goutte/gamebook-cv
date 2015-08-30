@@ -33,7 +33,7 @@ Then, you can browse [http://localhost:3000](http://localhost:3000).
 
 ## INSTALL
 
-Get composer, install, and make sure the `cache/` folder is writeable.
+Get composer, install, and optionally make sure the `cache/` folder is writeable.
 
     curl -s https://getcomposer.org/installer | php
     php composer.phar install
