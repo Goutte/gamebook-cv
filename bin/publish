@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# This file is set up for my private usage.
+# You can use it for yours by changing the parameters.
+# I suggest SSH key-based auth, so that you won't need to enter a password every time.
+
+## RSYNC WITH SERVER
+rsync -vr --delete . web@antoine-qrok.me:/home/goutenoir/antoine/cv

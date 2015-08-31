@@ -1,18 +1,27 @@
 <?php
 
-define('GP_ROOT_PATH', __DIR__ . '/../'); // :(|) oook?
+// Configuration
+
+define('GP_ROOT_PATH',  __DIR__ . '/../'); // :(|) oook?
+define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages/');
+define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
+
+// Autoloading & Vendors
 
 $loader = require_once GP_ROOT_PATH . 'vendor/autoload.php';
-//$loader->add('Goutte\Story', __DIR__.'/src'); // snippet for future usage
+//$loader->add('Goutte\Story', __DIR__.'/src'); // snippet
 
 use Silex\Application;
 use Symfony\Component\Finder\Finder;
 use Michelf\Markdown;
 
-// Hmmmm. Ideally, this should be frozen into static files.
+// todo: Ideally, it should also be possible to freeze this into static files.
 
 // Utils (some more monkey coding)
 
+/**
+ * @return bool Whether this script is run on local host or not.
+ */
 function is_localhost () {
     return (in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1',)));
 }
@@ -25,17 +34,25 @@ function is_localhost () {
  */
 function get_page ($id) {
     $finder = new Finder();
-    $finder->files()->in(GP_ROOT_PATH . 'pages')->name($id);
+    $finder->files()->in(GP_PAGES_PATH)->name($id);
     $files = array_values(iterator_to_array($finder));
     if (count($files) != 1) return null;
     return file_get_contents($files[0]->getPathname());
+}
+
+/**
+ * @param  string $id
+ * @return bool   Whether the page described by $id exists or not.
+ */
+function is_page ($id) {
+    return 1 == (new Finder())->files()->in(GP_PAGES_PATH)->name($id)->count();
 }
 
 
 // Engine : Silex App
 
 $app = new Application();
-$app['debug'] = is_localhost();
+$app['debug'] = is_localhost() || true;
 
 
 // Templating : Twig
@@ -55,10 +72,6 @@ $app->get('/', function(Application $app) {
     return $app->redirect('page/1');
 });
 
-$app->get('/porte/{id}', function (Application $app, $id) {
-    return $app->redirect('../page/'.$id);
-})->assert('id', '\d+');
-
 
 // Route : Show a Page in the Story
 
@@ -68,19 +81,35 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
     $source = get_page($id);
     if (null == $source) $app->abort(404, "Page {$id} does not exist.");
 
-    // Parse its markdown
+    // Convert integers in URLs to internal page links
     $markdownParser = new Markdown();
+    $markdownParser->url_filter_func = function ($url) {
+        $m = array();
+        if (preg_match('!^\s*('.GP_PAGE_REGEX.')\s*$!', $url, $m)) {
+            $url = "../page/${m[1]}";
+        }
+        return $url;
+    };
+
+    // Transform the markdown
     $page = $markdownParser->transform($source);
 
     // Add page links
-    $page = preg_replace('!page (\d+)!', '<a href="../page/$1">$0</a>', $page);
+    $page = preg_replace_callback('!page ('.GP_PAGE_REGEX.')!', function ($m) {
+        if (is_page($m[1])) return '<a href="../page/'.$m[1].'">'.$m[0].'</a>';
+        else                return $m[0];
+    }, $page);
 
     // Add conversation links
-    $page = preg_replace('!\s*\((\d+)\)\s*>\s*(.+)$!m', '&gt; <a class="talk" href="../page/$1">$2</a><br>', $page);
+    $page = preg_replace(
+        '!\s*\(('.GP_PAGE_REGEX.')\)\s*>\s*(.+)$!m',
+        '&gt; <a class="talk" href="../page/$1">$2</a><br>',
+        $page
+    );
 
     return $twig->render('page.html.twig', array('page' => $page));
 
-})->assert('id', '\d+');
+})->assert('id', GP_PAGE_REGEX);
 
 
 // Finally, run the app

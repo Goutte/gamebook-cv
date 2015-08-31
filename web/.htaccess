@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+    # This RewriteBase is specific to my server's architecture.
+    # Remove it if it causes you any trouble.
+    RewriteBase /cv/
+    ###########################################################
 
+    RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>

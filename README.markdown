@@ -4,10 +4,10 @@
 
 # WHAT?
 
-This is a Curriculum Vitæ where **YOU** are the hero.
-It is easily forkable and editable to make your own.
+This is a Curriculum Vitæ where **YOU** are the hero, in the form of a website.
+It should be easily forkable and editable to make your own.
 
-It is written in [PHP] and is powered by [Silex], [Twig], and [Markdown].
+The HTML generator is written in [PHP] and is powered by [Silex] and [Twig].
 
 
 # HOW TO
@@ -15,11 +15,25 @@ It is written in [PHP] and is powered by [Silex], [Twig], and [Markdown].
 
 ## USE
 
-Just edit the pages in the `pages/` folder. You can use markdown syntax and simple html tags.
-The "page XX" text will be replaced by links automagically.
+### Files Overview
 
+- `pages/` contains the source files for each page.
 - `web/index.php` contains most of the PHP glue.
 - `view/` contains the html templates.
+
+### Features Breakdown
+
+The source files in `pages/` support :
+
+- [Markdown]
+- Simple html tags
+- Translating `page 1` into a link to page 1
+- Translating `(42)> What was the question again?` into a dialogue link to page 42
+- Translating `[go to hell](666)` into a link to page 666
+
+The source files names **must** be alphanumerical, ie. validate `[a-zA-Z0-9_-]+`.
+
+### Test the website locally
 
 To run the website locally, simply go into the `web/` directory, and launch PHP's server :
 
@@ -33,14 +47,21 @@ Then, you can browse [http://localhost:3000](http://localhost:3000).
 
 ## INSTALL
 
-Get composer, install, and optionally make sure the `cache/` folder is writeable.
+You'll need `php >= 5.4`.
+
+The setup should be pretty straightforward if you already have [Composer] :
+
+    composer install
+
+Otherwise, here's how to get [Composer] and install :
 
     curl -s https://getcomposer.org/installer | php
     php composer.phar install
 
-    sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx cache
-    sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx cache
+If it complains that the `cache/` folder is not writeable, you can set it up :
 
+    sudo setfacl  -R -m u:www-data:rwx -m u:`whoami`:rwx cache
+    sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx cache
 
 # LICENCE
 
@@ -51,3 +72,4 @@ Unless specified otherwise (in third-party vendor libraries), this is public dom
 [Silex]: http://silex.sensiolabs.org
 [Twig]: http://twig.sensiolabs.org
 [Markdown]: https://wikipedia.org/wiki/Markdown
+[Composer]: https://getcomposer.org
