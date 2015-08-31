@@ -23,15 +23,15 @@ The HTML generator is written in [PHP] and is powered by [Silex] and [Twig].
 
 ### Features Breakdown
 
-The source files in `pages/` support :
+The source files in `pages/` support the following features :
 
 - [Markdown]
 - Simple html tags
-- Translating `page 1` into a link to page 1
-- Translating `(42)> What was the question again?` into a dialogue link to page 42
-- Translating `[go to hell](666)` into a link to page 666
+- Translating `page 1` into a link to page `1`
+- Translating `(42)> What was the question again?` into a dialogue link to page `42`
+- Translating `[go to hell](hell)` into a link to page `hell`
 
-The source files names **must** be alphanumerical, ie. validate `[a-zA-Z0-9_-]+`.
+The pages names **must** be alphanumerical, ie. validate `[a-zA-Z0-9_-]+`.
 
 ### Test the website locally
 

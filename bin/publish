@@ -5,4 +5,4 @@
 # I suggest SSH key-based auth, so that you won't need to enter a password every time.
 
 ## RSYNC WITH SERVER
-rsync -vr --delete . web@antoine-qrok.me:/home/goutenoir/antoine/cv
+rsync -r --delete . web@antoine-qrok.me:/home/goutenoir/antoine/cv
