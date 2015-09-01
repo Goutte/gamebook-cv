@@ -18,8 +18,8 @@ The HTML generator is written in [PHP] and is powered by [Silex] and [Twig].
 ### Files Overview
 
 - `pages/` contains the source files for each page.
-- `web/index.php` contains most of the PHP glue.
 - `view/` contains the html templates.
+- `web/index.php` contains most of the PHP glue.
 
 ### Features Breakdown
 

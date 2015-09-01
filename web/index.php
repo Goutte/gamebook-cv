@@ -1,12 +1,12 @@
 <?php
 
-// Configuration
+// Configuration ///////////////////////////////////////////////////////////////
 
 define('GP_ROOT_PATH',  __DIR__ . '/../'); // :(|) oook?
 define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages/');
 define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
 
-// Autoloading & Vendors
+// Autoloading & Vendors ///////////////////////////////////////////////////////
 
 $loader = require_once GP_ROOT_PATH . 'vendor/autoload.php';
 //$loader->add('Goutte\Story', __DIR__.'/src'); // snippet
@@ -17,7 +17,7 @@ use Michelf\Markdown;
 
 // todo: Ideally, it should also be possible to freeze this into static files.
 
-// Utils (some more monkey coding)
+// Utils (some more monkey coding) /////////////////////////////////////////////
 
 /**
  * @return bool Whether this script is run on local host or not.
@@ -49,13 +49,13 @@ function is_page ($id) {
 }
 
 
-// Engine : Silex App
+// Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
 $app['debug'] = is_localhost() || true;
 
 
-// Templating : Twig
+// Templating : Twig ///////////////////////////////////////////////////////////
 
 $twig_loader = new Twig_Loader_Filesystem(array(
     GP_ROOT_PATH . 'view',
@@ -66,14 +66,14 @@ $twig = new Twig_Environment($twig_loader, array(
 ));
 
 
-// Route : Aliases
+// Route : Aliases /////////////////////////////////////////////////////////////
 
 $app->get('/', function(Application $app) {
     return $app->redirect('page/1');
 });
 
 
-// Route : Show a Page in the Story
+// Route : Show a Page in the Story ////////////////////////////////////////////
 
 $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
 
@@ -94,13 +94,13 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
     // Transform the markdown
     $page = $markdownParser->transform($source);
 
-    // Add page links
+    // Transform page links
     $page = preg_replace_callback('!page ('.GP_PAGE_REGEX.')!', function ($m) {
         if (is_page($m[1])) return '<a href="../page/'.$m[1].'">'.$m[0].'</a>';
         else                return $m[0];
     }, $page);
 
-    // Add conversation links
+    // Transform dialogue links
     $page = preg_replace(
         '!\s*\(('.GP_PAGE_REGEX.')\)\s*>\s*(.+)$!m',
         '&gt; <a class="talk" href="../page/$1">$2</a><br>',
@@ -112,6 +112,6 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
 })->assert('id', GP_PAGE_REGEX);
 
 
-// Finally, run the app
+// Finally, run the app ////////////////////////////////////////////////////////
 
 $app->run();
