@@ -37,10 +37,8 @@ The pages names **must** be alphanumerical, ie. validate `[a-zA-Z0-9_-]+`.
 
 To run the website locally, simply go into the `web/` directory, and launch PHP's server :
 
-```
-$ cd web
-$ php -S localhost:3000
-```
+    cd web
+    php -S localhost:3000
 
 Then, you can browse [http://localhost:3000](http://localhost:3000).
 

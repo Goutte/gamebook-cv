@@ -81,6 +81,13 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
     $source = get_page($id);
     if (null == $source) $app->abort(404, "Page {$id} does not exist.");
 
+    // Handle page inclusions `{% include page xxx %}`
+    $source = preg_replace_callback(
+        '!\{%\s+include\s+page\s+('.GP_PAGE_REGEX.')\s+%\}!',
+        function ($m) { return (is_page($m[1])) ? get_page($m[1]) : $m[1]; },
+        $source
+    );
+
     // Convert integers in URLs to internal page links
     $markdownParser = new Markdown();
     $markdownParser->url_filter_func = function ($url) {
@@ -100,10 +107,22 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
         else                return $m[0];
     }, $page);
 
-    // Transform dialogue links
-    $page = preg_replace(
+    // Transform dialogue links `(xxx)> blablabla`
+    $page = preg_replace_callback(
         '!\s*\(('.GP_PAGE_REGEX.')\)\s*>\s*(.+)$!m',
-        '&gt; <a class="talk" href="../page/$1">$2</a><br>',
+        function ($m) use ($id) {
+            if (is_page($m[1])) {
+                if ($m[1] != $id) {
+                    return '&gt; <a class="talk" href="../page/'.$m[1].'">'.
+                           $m[2].
+                           '</a><br>';
+                } else {
+                    return '';
+                }
+            } else {
+                return '&gt; <a class="talk todo" href="#">'.$m[2].'</a><br>';
+            }
+        },
         $page
     );
 
