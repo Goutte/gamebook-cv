@@ -109,18 +109,20 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
 
     // Transform dialogue links `(xxx)> blablabla`
     $page = preg_replace_callback(
-        '!\s*\(('.GP_PAGE_REGEX.')\)\s*>\s*(.+)$!m',
+        '!\s*\(('.GP_PAGE_REGEX.')\)\s*>\s*(.+?)(</p>)?$!m',
         function ($m) use ($id) {
             if (is_page($m[1])) {
                 if ($m[1] != $id) {
                     return '&gt; <a class="talk" href="../page/'.$m[1].'">'.
                            $m[2].
-                           '</a><br>';
+                           '</a><br>'.
+                           ((isset($m[3])) ? '</p>' : '');
                 } else {
                     return '';
                 }
             } else {
-                return '&gt; <a class="talk todo" href="#">'.$m[2].'</a><br>';
+                return '&gt; <a class="talk todo" href="#">'.$m[2].'</a><br>'.
+                       ((isset($m[3])) ? '</p>' : '');
             }
         },
         $page
