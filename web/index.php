@@ -52,7 +52,7 @@ function is_page ($id) {
 // Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
-$app['debug'] = is_localhost() || true;
+$app['debug'] = is_localhost() || false;
 
 
 // Templating : Twig ///////////////////////////////////////////////////////////
