@@ -1,7 +1,7 @@
 
 ## Bienvenue !
 
-Vous pénétrez une antichambre moderne et sobre, sentant vaguement la lavande et les agrumes.
+Vous pénétrez une antichambre moderne et sobre, aux effluves diffuses de lavande et d'agrumes.
 
 Sur le mur, un écriteau où est inscrit _"Visite libre ; faites comme chez vous"_ vous invite muettement à la découverte.
 
@@ -16,7 +16,9 @@ Vous pouvez l'ignorer, ou [le prendre dans vos mains](game-cyx).
 Vous scannez d'un œil expert le reste de la pièce, qui comporte plusieurs portes.
 
 (room-chill)> Ouvrir la porte intitulée "**Salle de Jeux**"
-(nope)> Ouvrir la porte intitulée "…"
+(nope)> Ouvrir la porte intitulée "**Laboratoire**"
+(nope)> Ouvrir la porte intitulée "**Bibliothèque**"
+(nope)> Ouvrir la porte intitulée "**Bureau**"
 
 
 
