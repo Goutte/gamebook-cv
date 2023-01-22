@@ -1,14 +1,14 @@
 <?php
 
 // Configuration ///////////////////////////////////////////////////////////////
-
-define('GP_ROOT_PATH',  __DIR__ . '/../'); // :(|) oook?
-define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages/');
+define('DS', DIRECTORY_SEPARATOR);
+define('GP_ROOT_PATH',  __DIR__ . DS . '..' . DS); // :(|) oook?
+define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages' . DS);
 define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
 
 // Autoloading & Vendors ///////////////////////////////////////////////////////
 
-$loader = require_once GP_ROOT_PATH . 'vendor/autoload.php';
+$loader = require_once GP_ROOT_PATH . 'vendor' . DS . 'autoload.php';
 //$loader->add('Goutte\Story', __DIR__.'/src'); // snippet
 
 use Silex\Application;
@@ -20,10 +20,22 @@ use Michelf\Markdown;
 // Utils (some more monkey coding) /////////////////////////////////////////////
 
 /**
- * @return bool Whether this script is run on local host or not.
+ * @return bool Whether this script is run on local host (during dev) or not.
  */
 function is_localhost () {
     return (in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1',)));
+}
+
+/**
+ * A factory for our page finder.
+ * You need to apply the ->name() filter on it with the page id, to find a page.
+ *
+ * @return Finder
+ */
+function get_page_finder() {
+    $finder = new Finder();
+    $finder->files()->in(GP_PAGES_PATH)->depth('< 1');
+    return $finder;
 }
 
 /**
@@ -33,8 +45,7 @@ function is_localhost () {
  * @return null|string
  */
 function get_page ($id) {
-    $finder = new Finder();
-    $finder->files()->in(GP_PAGES_PATH)->name($id);
+    $finder = get_page_finder()->name($id);
     $files = array_values(iterator_to_array($finder));
     if (count($files) != 1) return null;
     return file_get_contents($files[0]->getPathname());
@@ -45,26 +56,38 @@ function get_page ($id) {
  * @return bool   Whether the page described by $id exists or not.
  */
 function is_page ($id) {
-    return 1 == (new Finder())->files()->in(GP_PAGES_PATH)->name($id)->count();
+    return 1 == get_page_finder()->name($id)->count();
 }
 
 
 // Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
-$app['debug'] = is_localhost() || false;
+$app['debug'] = is_localhost(); // || false;
 
 
 // Templating : Twig ///////////////////////////////////////////////////////////
 
 $twig_loader = new Twig_Loader_Filesystem(array(
     GP_ROOT_PATH . 'view',
-//    GP_ROOT_PATH . 'cache/pages',
 ));
-$twig = new Twig_Environment($twig_loader, array(
-    'cache' => GP_ROOT_PATH . 'cache',
-));
+$twig_config = array();
+if ( ! is_localhost()) {
+    $twig_config['cache'] = GP_ROOT_PATH . 'cache';
+}
+$twig = new Twig_Environment($twig_loader, $twig_config);
 
+$twig_random_function = new \Twig\TwigFunction('epicene', function () {
+    $args = func_get_args();
+    $amount_of_args = count($args);
+
+    if ($amount_of_args == 1 && is_array($args[0])) {
+        return $args[0][rand(0, count($args[0]) - 1)];
+    }
+
+    return "Not implemented (yet).";
+});
+$twig->addFunction($twig_random_function);
 
 // Route : Aliases /////////////////////////////////////////////////////////////
 
