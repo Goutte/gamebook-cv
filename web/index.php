@@ -62,6 +62,14 @@ function is_page ($id) {
 }
 
 
+// Visitor (Webnaut) ///////////////////////////////////////////////////////////
+
+define('FEMALE', 0);
+define('MALE', 1);
+define('OTHER', 2);
+$genre = rand(0, 1);  // use userland cookie and a form at some point ?
+
+
 // Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
@@ -79,11 +87,27 @@ if ( ! is_localhost()) {
 }
 $twig = new Twig_Environment($twig_loader, $twig_config);
 
-$twig_random_function = new TwigFunction('epicene', function () {
+$twig_random_function = new TwigFunction('epicene', function () use ($genre) {
     $args = func_get_args();
     $amount_of_args = count($args);
 
     if ($amount_of_args == 1 && is_array($args[0])) {
+        $argc = count($args[0]);
+        if ($argc == 0) {  // to switch() or not to switch() ?
+            return '';
+        }
+        else if ($argc == 1) {
+            return $args[0][0];
+        }
+        else if ($argc == 2) {
+            if ($genre < 2) {
+                return $args[0][$genre];
+            }
+        }
+        else if ($argc == 3) {
+            return $args[0][$genre];
+        }
+
         return $args[0][rand(0, count($args[0]) - 1)];
     }
 
@@ -100,7 +124,7 @@ $app->get('/', function(Application $app) {
 
 // Route : Show a Page in the Story ////////////////////////////////////////////
 
-$app->get('/page/{id}', function (Application $app, $id) use ($twig) {
+$app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
 
     // Grab the source file contents, or 404
     $source = get_page($id);
@@ -128,7 +152,7 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
     // Apply Twig to the page source  #security-concern  (ok so long as pages are curated)
     $pageTwig = $twig->createTemplate($source, 'page-' . $id);  // todo: cache ; not like this
     $source = $pageTwig->render(array(
-        'e' => (rand(0, 1) == 0) ? 'e' : '',
+        'e' => ($genre == 0) ? 'e' : '',
     ));
 
     // Transform the markdown
