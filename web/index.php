@@ -16,7 +16,8 @@ use Symfony\Component\Finder\Finder;
 use Michelf\Markdown;
 use Twig\TwigFunction;
 
-// todo: Ideally, it should also be possible to freeze this into static files.
+// Ideally, it should also be possible to freeze this into static files.
+// We **could**, but I like the epicene dynamism better.
 
 // Utils (some more monkey coding) /////////////////////////////////////////////
 
@@ -64,7 +65,7 @@ function is_page ($id) {
 // Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
-$app['debug'] = is_localhost(); // || false;
+$app['debug'] = is_localhost(); // || true;
 
 
 // Templating : Twig ///////////////////////////////////////////////////////////
@@ -101,9 +102,11 @@ $app->get('/', function(Application $app) {
 
 $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
 
-    // Grab the source file contents
+    // Grab the source file contents, or 404
     $source = get_page($id);
-    if (null == $source) $app->abort(404, "Page {$id} does not exist.");
+    if (null == $source) {
+        $app->abort(404, "Page {$id} does not exist.");
+    }
 
     // Handle page inclusions `{% include page xxx %}`
     $source = preg_replace_callback(
@@ -121,6 +124,12 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
         }
         return $url;
     };
+
+    // Apply Twig to the page source  #security-concern  (ok so long as pages are curated)
+    $pageTwig = $twig->createTemplate($source, 'page-' . $id);  // todo: cache ; not like this
+    $source = $pageTwig->render(array(
+        'e' => (rand(0, 1) == 0) ? 'e' : '',
+    ));
 
     // Transform the markdown
     $page = $markdownParser->transform($source);
@@ -152,7 +161,10 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig) {
         $page
     );
 
-    return $twig->render('page.html.twig', array('page' => $page));
+    return $twig->render('page.html.twig', array(
+        'page' => $page,
+//        'e' => (rand(0, 1) == 0) ? 'e' : '',
+    ));
 
 })->assert('id', GP_PAGE_REGEX);
 

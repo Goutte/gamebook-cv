@@ -3,7 +3,7 @@
 
 Votre intuition vous suggère à raison qu'il s'agit d'un jouet, ou d'un puzzle.
 
-![Cyx](../img/cyx-toying-with-godot.gif)
+![Cyx ; an animated geodetic sphere](../img/cyx-toying-with-godot.gif)
 
 Une étiquette lui est affixée :
 
@@ -12,6 +12,6 @@ Une étiquette lui est affixée :
 
 ---
 
-Vous pouvez [appuyer sur une tuile de l'objet](https://antoine.goutenoir.com/games/cyx),
-ou [le reposer sur la table](1).
+Vous pouvez [appuyer sur une tuile de la sphère](https://antoine.goutenoir.com/games/cyx),
+ou [la reposer sur la table](1#continue).
 
