@@ -14,6 +14,7 @@ $loader = require_once GP_ROOT_PATH . 'vendor' . DS . 'autoload.php';
 use Silex\Application;
 use Symfony\Component\Finder\Finder;
 use Michelf\Markdown;
+use Twig\TwigFunction;
 
 // todo: Ideally, it should also be possible to freeze this into static files.
 
@@ -77,7 +78,7 @@ if ( ! is_localhost()) {
 }
 $twig = new Twig_Environment($twig_loader, $twig_config);
 
-$twig_random_function = new \Twig\TwigFunction('epicene', function () {
+$twig_random_function = new TwigFunction('epicene', function () {
     $args = func_get_args();
     $amount_of_args = count($args);
 
