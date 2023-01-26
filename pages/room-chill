@@ -3,15 +3,20 @@
 
 Vous entrez dans une grande salle tamisée, dotée de canapés généreux et de fauteuils molletonneux.
 
-Une musique de fond vous fait tendre l'oreille, et la stupeur vous envahit ; cette mélodie…
-_C'est un remix de la musique de votre jeu vidéo favori !_
+(room-chill-plays-video-games)> Vous aimez jouer à certains jeux vidéo.
+(room-chill-plays-board-games)> Vous préférez les jeux de société.
+(room-chill-plays-rpg)> Vous préférez les jeux de rôle.
+(room-chill-all-work-no-play)> Vous ne jouez pas.
+
+
+<span id="continue"></span>
 
 🎶
 
 La salle comporte un certain nombre de jeux, et un atelier dans un recoin.
 
 <a href="https://goutte.itch.io/mu" target="blank">
-    <img src="../img/mu.png" alt="Mû ; un échiquier valonné avec des pièces de quatre couleurs" title="Mû" />
+    <img src="../img/mu.png" alt="Mû ; un échiquier valonné avec des pièces de quatre couleurs, en équipes de deux.  Une pièce de chaque couleur est plus grande et ressemble à une statue Moaï." title="Mû" />
 </a>
 
 > [Mû](https://goutte.itch.io/mu) est un jeu de stratégie combinatoire abstrait conçu lors d'une courte jam, pour pouvoir y jouer avec mon père, qui m'a offert le livre.
@@ -25,6 +30,15 @@ La salle comporte un certain nombre de jeux, et un atelier dans un recoin.
 
 > [Octron Mania](https://goutte.itch.io/octron-mania) est un jeu à patounes conçu en quelques heures avec un ami dans un instant de convivialité, pour tester le moteur d'octaèdres tronqués que je fabrique pour un autre jeu.
 > <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i><i class="icon-linux" title="Compatible Linux" aria-label="Compatible Linux"></i><i class="icon-windows" title="Compatible Windows" aria-label="Compatible Windows"></i>
+
+---
+
+<a href="https://antoine.goutenoir.com/games/cyx" target="blank">
+    <img src="../img/cyx.png" alt="Cyx ; une sphère géodesique en nid d'abeille sur laquelle on joue à une sorte de morpion avec plusieurs solutions." title="Jouer à Cyx" />
+</a>
+
+> [Cyx](https://antoine.goutenoir.com/games/cyx) est un jeu de stratégie combinatoire abstrait, conçu pour recycler le plateau de jeu en géode créé à la base pour un jeu de Go.  Merci à [Kiouze](https://qze.fr) pour le logo et la bannière !
+> <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i>
 
 ---
 
