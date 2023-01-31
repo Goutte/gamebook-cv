@@ -54,6 +54,8 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
+
+.icon-opensource:before { content: '\e800'; } /* '' */
 .icon-html5:before { content: '\f13b'; } /* '' */
 .icon-apple:before { content: '\f179'; } /* '' */
 .icon-windows:before { content: '\f17a'; } /* '' */
