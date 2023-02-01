@@ -51,4 +51,10 @@ La salle comporte un certain nombre de jeux, et un atelier dans un recoin.
 
 ---
 
-[Retourner à l'antichambre](1).
+De nombreux autres jeux en construction sont rangés près de l'atelier.
+
+Vous pouvez :
+
+(room-chill-workshop)> Inspecter l'atelier.
+(1)> Retourner à l'antichambre.
+

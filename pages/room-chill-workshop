@@ -1,0 +1,30 @@
+## Atelier
+
+Parmi les outils visiblement utilisés de l'atelier à jeux, certains portent une étiquette.
+
+Des tournevis multiformes **Javascript**, _Coffeescript_, _Typescript_ et _Dart_.
+
+Une imprimante 3D nommée **Godot Game Engine** (v3/v4),
+équipée de nombreux modules de productivité et de vitesse,
+dont certains sont ostensiblement artisanaux.
+
+Des burins de bourrin, engravés _WebGL_, _OpenGL_ et _Vulkan_.
+
+Vous reconnaissez sans peine les pinceaux **HTML** et **CSS**.
+
+Un compas et une règle reposent sur des gribouillages mathématiques de _quaternions_, de _nombres surréels_, de _permutoèdres_ et d'_épicycloïdes_.
+
+![An organic-looking epicycloid](../img/epicycloid_19.png)
+
+<br>
+
+---
+
+> Votre inspection est fructueuse : vous gagnez _11 points d'expérience_, et empochez un
+> <a target="__blank" href="https://www.khanacademy.org/computer-programming/spirograph/5971189861990400">générateur d'épicycloïdes</a>.
+
+Vous pouvez :
+
+(room-chill#continue)> Continuer à explorer la salle de jeux.
+(1)> Retourner à l'antichambre.
+
