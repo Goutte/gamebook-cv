@@ -1,0 +1,64 @@
+
+## Le Laboratoire
+
+Vous entrez dans une salle blanche sans fenêtres, aux murs couverts de posters scientifiques éclairés par des néons blafards.
+
+<span id="continue"></span>
+
+Vous y découvrez des instruments de mesure et d'ajustement, ainsi que des **modèles 3D de galaxies** lointaines.
+
+<a href="https://galpak3d.univ-lyon1.fr/" target="blank">
+    <img src="../img/galpak3d.png" alt="GalPak3D" title="GalPak3D - Galaxy Parameters and Kinematics" />
+</a>
+
+<br>
+
+Sur un coin de table, vous trouvez une **calculatrice d'empreinte carbone** de séminaires scientifiques.
+Elle semble savoir choisir un lieu de rencontre qui minimise les trajets en avion, en agrégeant divers modèles d'émission de CO<sub>2</sub> pour lisser les exagérations de chacun.
+
+> [https://travel-footprint-calculator.irap.omp.eu/](https://travel-footprint-calculator.irap.omp.eu/)
+
+<br>
+
+Une mappemonde en puzzle, composée d'une myriade de minuscules images agencées minutieusement,
+déploie devant vos yeux le _fond diffus cosmologique_, probable résidu du Big Bang.
+
+> [https://cade.irap.omp.eu/dokuwiki/doku.php?id=drizzlib](https://cade.irap.omp.eu/dokuwiki/doku.php?id=drizzlib)
+
+<br>
+
+Sur un écran interactif, la **météo de l'espace** déroule en continu ses prévisions de tempêtes de plasma pour la semaine :
+
+> [http://heliopropa.irap.omp.eu](http://heliopropa.irap.omp.eu)
+
+<br>
+
+À ses côtés, des globes planétaires miniatures flottent en émettant une lumière d'aurore boréale, signe que leur **ionosphère** est chargée…
+Vous avez envie de les toucher, mais votre instinct de survie vous intime de vous abstenir.
+
+> [http://transplanet.irap.omp.eu/](http://transplanet.irap.omp.eu)
+
+<br>
+
+<!--
+- **MUSE** : _Multi-Unit Spectroscopic Explorer_ ([en savoir plus](https://fr.wikipedia.org/wiki/Multi_Unit_Spectroscopic_Explorer))
+-->
+
+Vous constatez la présence de nombreux instruments et outils anonymes, conçus sur-mesure pour des besoins ponctuels,
+avec souvent une note explicative en japonais ou en anglais.
+
+Vous reconnaissez l'ancêtre des _réseaux de neurones_ modernes, la _chaîne de Markov_,
+et moult outils mathématiques plus ou moins sophistiqués.
+
+<br>
+
+---
+
+Vous pouvez :
+
+(room-lab-muse)> Allumer le téléscope.
+(room-lab-tfc)> Utiliser la calculatrice.
+(room-lab-transplanet)> Toucher un globe planétaire.
+(room-lab-research)> Fouiller la pièce.
+(1)> Retourner à l'antichambre.
+
