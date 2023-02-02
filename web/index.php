@@ -1,10 +1,12 @@
 <?php
 
 // Configuration ///////////////////////////////////////////////////////////////
+
 define('DS', DIRECTORY_SEPARATOR);
 define('GP_ROOT_PATH',  __DIR__ . DS . '..' . DS); // :(|) oook?
 define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages' . DS);
 define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
+
 
 // Autoloading & Vendors ///////////////////////////////////////////////////////
 
@@ -170,7 +172,7 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         function ($m) use ($id) {
             if (is_page($m[1])) {
                 if ($m[1] != $id) {
-                    return '&gt; <a class="talk" href="../page/'.$m[1].$m[2].'">'.
+                    return '&#11166; <a class="talk" href="../page/'.$m[1].$m[2].'">'.
                            $m[3].
                            '</a><br>'.
                            ((isset($m[4])) ? '</p>' : '');
@@ -178,7 +180,7 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
                     return '';
                 }
             } else {
-                return '&gt; <a class="talk todo" href="#">'.$m[3].'</a><br>'.
+                return '&#11166; <a class="talk todo" href="#">'.$m[3].'</a><br>'.
                        ((isset($m[4])) ? '</p>' : '');
             }
         },
