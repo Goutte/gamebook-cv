@@ -16,7 +16,7 @@ Vous y découvrez des instruments de mesure et d'ajustement, ainsi que des **mod
 Sur un coin de table, vous trouvez une **calculatrice d'empreinte carbone** de séminaires scientifiques.
 Elle semble savoir choisir un lieu de rencontre qui minimise les trajets en avion, en agrégeant divers modèles d'émission de CO<sub>2</sub> pour lisser les exagérations de chacun.
 
-> [https://travel-footprint-calculator.irap.omp.eu/](https://travel-footprint-calculator.irap.omp.eu/)
+> [https://travel-footprint-calculator.irap.omp.eu](https://travel-footprint-calculator.irap.omp.eu/)
 
 <br>
 
@@ -40,10 +40,6 @@ Vous avez envie de les toucher, mais votre instinct de survie vous intime de vou
 
 <br>
 
-<!--
-- **MUSE** : _Multi-Unit Spectroscopic Explorer_ ([en savoir plus](https://fr.wikipedia.org/wiki/Multi_Unit_Spectroscopic_Explorer))
--->
-
 Vous constatez la présence de nombreux instruments et outils anonymes, conçus sur-mesure pour des besoins ponctuels,
 avec souvent une note explicative en japonais ou en anglais.
 
@@ -57,7 +53,7 @@ et moult outils mathématiques plus ou moins sophistiqués.
 Vous pouvez :
 
 (room-lab-muse)> Allumer le téléscope.
-(room-lab-tfc)> Utiliser la calculatrice.
+(room-lab-tfc)> Inspecter la calculatrice.
 (room-lab-transplanet)> Toucher un globe planétaire.
 (room-lab-research)> Fouiller la pièce.
 (1)> Retourner à l'antichambre.

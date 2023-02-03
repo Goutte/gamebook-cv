@@ -6,6 +6,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('GP_ROOT_PATH',  __DIR__ . DS . '..' . DS); // :(|) oook?
 define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages' . DS);
 define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
+define('GP_URL_REGEX', 'https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
 
 
 // Autoloading & Vendors ///////////////////////////////////////////////////////
@@ -157,6 +158,20 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         'e' => ($genre == 0) ? 'e' : '',
     ));
 
+
+    $source = preg_replace_callback(
+        '!^\((?P<url>'.GP_URL_REGEX.')\)\s*>\s*(?P<anchor>.+?)$!m',
+        function ($m) use ($id) {
+            return '&#11166; <a class="talk" href="'.$m['url'].'" target="__blank">'.
+                $m['anchor'] .
+                '</a><br>'
+                ;
+        },
+        $source
+    );
+
+//    return $source;
+
     // Transform the markdown
     $page = $markdownParser->transform($source);
 
@@ -165,6 +180,9 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         if (is_page($m[1])) return '<a href="../page/'.$m[1].'">'.$m[0].'</a>';
         else                return $m[0];
     }, $page);
+
+
+
 
     // Transform dialogue links `(xxx)> blablabla`
     $page = preg_replace_callback(
@@ -186,6 +204,8 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         },
         $page
     );
+
+
 
     return $twig->render('page.html.twig', array(
         'page' => $page,
