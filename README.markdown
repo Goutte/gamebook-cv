@@ -1,6 +1,5 @@
 
-**This is a Work in Progress.**
-
+> **Note**: Silex has been deprecated.  This still works, though.
 
 # WHAT?
 

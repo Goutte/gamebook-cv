@@ -28,7 +28,11 @@ use Twig\TwigFunction;
  * @return bool Whether this script is run on local host (during dev) or not.
  */
 function is_localhost () {
-    return (in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1',)));
+    return (
+        in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1','::1',))
+        ||
+        @$_SERVER['SERVER_NAME'] == 'localhost'
+    );
 }
 
 /**
@@ -69,14 +73,14 @@ function is_page ($id) {
 
 define('FEMALE', 0);
 define('MALE', 1);
-define('OTHER', 2);
+define('OTHER', 2);  // unused for now
 $genre = rand(0, 1);  // use userland cookie and a form at some point ?
 
 
 // Engine : Silex App //////////////////////////////////////////////////////////
 
 $app = new Application();
-$app['debug'] = is_localhost(); // || true;
+$app['debug'] = is_localhost();
 
 
 // Templating : Twig ///////////////////////////////////////////////////////////
@@ -86,11 +90,13 @@ $twig_loader = new Twig_Loader_Filesystem(array(
 ));
 $twig_config = array();
 if ( ! is_localhost()) {
-    $twig_config['cache'] = GP_ROOT_PATH . 'cache';
+    //$twig_config['cache'] = GP_ROOT_PATH . 'cache';
+    // Having to handle write permissions is annoying, so we write to /tmp
+    $twig_config['cache'] = "/tmp/gamebook-cv-cache";
 }
 $twig = new Twig_Environment($twig_loader, $twig_config);
 
-$twig_random_function = new TwigFunction('epicene', function () use ($genre) {
+$twig_epicene_function = new TwigFunction('epicene', function () use ($genre) {
     $args = func_get_args();
     $amount_of_args = count($args);
 
@@ -116,7 +122,7 @@ $twig_random_function = new TwigFunction('epicene', function () use ($genre) {
 
     return "Not implemented (yet).";
 });
-$twig->addFunction($twig_random_function);
+$twig->addFunction($twig_epicene_function);
 
 
 // Route : Aliases /////////////////////////////////////////////////////////////
@@ -154,7 +160,7 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
     };
 
     // Apply Twig to the page source  #security-concern  (ok so long as pages are curated)
-    $pageTwig = $twig->createTemplate($source, 'page-' . $id);  // todo: cache ; not like this
+    $pageTwig = $twig->createTemplate($source, 'page-' . $id);
     $source = $pageTwig->render(array(
         'e' => ($genre == 0) ? 'e' : '',
     ));
@@ -179,9 +185,6 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         if (is_page($m[1])) return '<a href="../page/'.$m[1].'">'.$m[0].'</a>';
         else                return $m[0];
     }, $page);
-
-
-
 
     // Transform dialogue links `(xxx)> blablabla`
     $page = preg_replace_callback(
