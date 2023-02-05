@@ -29,6 +29,8 @@ déploie devant vos yeux le _fond diffus cosmologique_, probable résidu du Big 
 
 Sur un écran interactif, la **météo de l'espace** déroule en continu ses prévisions de tempêtes de plasma pour la semaine :
 
+![A short comic where the Sun sneezes on earth and everything catches fire, by author @WeFlaps](../img/space_weather_meme.png)
+
 > [http://heliopropa.irap.omp.eu](http://heliopropa.irap.omp.eu)
 
 <br>
@@ -55,6 +57,6 @@ Vous pouvez :
 (room-lab-muse)> Allumer le téléscope.
 (room-lab-tfc)> Inspecter la calculatrice.
 (room-lab-transplanet)> Toucher un globe planétaire.
-(room-lab-research)> Fouiller la pièce.
+(room-lab-search)> Fouiller la pièce.
 (1)> Retourner à l'antichambre.
 
