@@ -118,6 +118,7 @@ $twig_random_function = new TwigFunction('epicene', function () use ($genre) {
 });
 $twig->addFunction($twig_random_function);
 
+
 // Route : Aliases /////////////////////////////////////////////////////////////
 
 $app->get('/', function(Application $app) {
@@ -158,19 +159,17 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         'e' => ($genre == 0) ? 'e' : '',
     ));
 
-
+    // Convert talk links to external pages
     $source = preg_replace_callback(
         '!^\((?P<url>'.GP_URL_REGEX.')\)\s*>\s*(?P<anchor>.+?)$!m',
         function ($m) use ($id) {
-            return '&#11166; <a class="talk" href="'.$m['url'].'" target="__blank">'.
+            return '&#11166; <a class="talk" href="'.$m['url'].'" target="_blank">'.
                 $m['anchor'] .
                 '</a><br>'
                 ;
         },
         $source
     );
-
-//    return $source;
 
     // Transform the markdown
     $page = $markdownParser->transform($source);
@@ -205,11 +204,8 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         $page
     );
 
-
-
     return $twig->render('page.html.twig', array(
         'page' => $page,
-//        'e' => (rand(0, 1) == 0) ? 'e' : '',
     ));
 
 })->assert('id', GP_PAGE_REGEX);
