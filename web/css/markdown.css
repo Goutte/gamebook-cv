@@ -1,19 +1,35 @@
+
+:root {
+    --bg-color: #222;
+    --text-color: #ddd;
+    --link-color: #86d9ff;
+    --link-hover-color: #baeaff;
+    --link-visited-color: #ffb886;
+    --link-visited-hover-color: #ffd7be;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: #dcdcdc;
+        --text-color: #1e1e1e;
+        --link-color: #446b80;
+        --link-hover-color: #5e757e;
+        --link-visited-color: #614633;
+        --link-visited-hover-color: #7b695e;
+    }
+}
+
 body {
     font-family: Georgia, Palatino, serif;
-    color: #ddd;
-    background-color: #222;
-
-    /*font-size: 1.2em;*/
-    /*line-height: 1.5;*/
+    color: var(--text-color);
+    background-color: var(--bg-color);
 
     max-width: 960px;
-
     margin: 0 auto;
     padding: 30px;
 }
 
 h1, h2, h3, h4 {
-    /*color: #111111;*/
     font-weight: 400;
 }
 
@@ -50,19 +66,19 @@ a {
     /*margin: 0;*/
     /*padding: 0;*/
     /*vertical-align: baseline;*/
-    color: #86d9ff;
+    color: var(--link-color);
 }
 
 a:hover {
-    color: #baeaff;
+    color: var(--link-hover-color);
 }
 
 a:visited {
-    color: #ffb886;
+    color: var(--link-visited-color);
 }
 
 a:visited:hover {
-    color: #ffd7be;
+    color: var(--link-visited-hover-color);
 }
 
 a.talk {
@@ -170,7 +186,7 @@ em {
 }
 
 
-/* Reset Code below this line is copyright Twitter Inc. */
+/* RESET */
 
 button,
 input,
