@@ -9,6 +9,8 @@ define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
 define('GP_URL_REGEX', 'https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
 
 $icons = [
+    'python'     => ["Made with Python"],
+    'php'        => ["Made with PHP"],
     'html5'      => ["Compatible HTML5"],
     'linux'      => ["Compatible Linux"],
     'windows'    => ["Compatible Windows"],

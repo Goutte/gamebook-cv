@@ -43,7 +43,7 @@ La salle comporte un certain nombre de jeux, et un atelier dans un recoin.
 ---
 
 <a href="https://antoine.goutenoir.com/games/nanogodo" target="_blank">
-    <img src="../img/nanogodo.png" alt="Nanogodo ; " title="Jouer à Nanogodo" />
+    <img src="../img/nanogodo.png" alt="Nanogodo ; un petit robot bleu sourit au milieu d'une usine avec des convoyeurs et des bras mécaniques, sur un pavage hexagonal." title="Jouer à Nanogodo" />
 </a>
 
 > [Nanogodo](https://antoine.goutenoir.com/games/nanogodo) est un jeu d'usine inachevé, conçu pour apprendre Godot lors d'une auto-formation d'un mois.  C'est un clone de _Factorio_, mais avec un pavage hexagonal et les éléments du tableau périodique.

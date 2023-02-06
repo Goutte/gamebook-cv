@@ -56,28 +56,12 @@
 }
 
 
-/* '' */
-.icon-opensource:before {
-    content: '\e800';
-}
+.icon-opensource:before { content: '\e800'; } /* '' */
+.icon-python:before { content: '\e802'; } /* '' */
+.icon-php:before { content: '\e80e'; } /* '' */
+.icon-html5:before { content: '\f13b'; } /* '' */
+.icon-apple:before { content: '\f179'; } /* '' */
+.icon-windows:before { content: '\f17a'; } /* '' */
+.icon-linux:before { content: '\f17c'; } /* '' */
 
-/* '' */
-.icon-html5:before {
-    content: '\f13b';
-}
-
-/* '' */
-.icon-apple:before {
-    content: '\f179';
-}
-
-/* '' */
-.icon-windows:before {
-    content: '\f17a';
-}
-
-/* '' */
-.icon-linux:before {
-    content: '\f17c';
-}
 
