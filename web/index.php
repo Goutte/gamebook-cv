@@ -8,6 +8,13 @@ define('GP_PAGES_PATH', GP_ROOT_PATH . 'pages' . DS);
 define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
 define('GP_URL_REGEX', 'https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
 
+$icons = [
+    'html5'      => ["Compatible HTML5"],
+    'linux'      => ["Compatible Linux"],
+    'windows'    => ["Compatible Windows"],
+    'apple'      => ["Compatible Apple"],
+    'opensource' => ["Open Source"],
+];
 
 // Autoloading & Vendors ///////////////////////////////////////////////////////
 
@@ -134,7 +141,7 @@ $app->get('/', function(Application $app) {
 
 // Route : Show a Page in the Story ////////////////////////////////////////////
 
-$app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
+$app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre, $icons) {
 
     // Grab the source file contents, or 404
     $source = get_page($id);
@@ -176,6 +183,17 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre) {
         },
         $source
     );
+
+    // Convert [[someicon]] to icons (see $icons in config up top)
+    foreach ($icons as $icon => $iconData) {
+        $source = preg_replace_callback(
+            '!\[\[(?P<icon>'.$icon.')]]!',
+            function ($m) use ($icon, $iconData) {
+                return '<i class="icon-'.$icon.'" title="'.$iconData[0].'" aria-label="'.$iconData[0].'"></i>';
+            },
+            $source
+        );
+    }
 
     // Transform the markdown
     $page = $markdownParser->transform($source);

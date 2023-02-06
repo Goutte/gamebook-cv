@@ -15,39 +15,39 @@ Vous entrez dans une grande salle tamisée, dotée de canapés généreux et de 
 
 La salle comporte un certain nombre de jeux, et un atelier dans un recoin.
 
-<a href="https://goutte.itch.io/mu" target="blank">
+<a href="https://goutte.itch.io/mu" target="_blank">
     <img src="../img/mu.png" alt="Mû ; un échiquier valonné avec des pièces de quatre couleurs, en équipes de deux.  Une pièce de chaque couleur est plus grande et ressemble à une statue Moaï." title="Mû" />
 </a>
 
 > [Mû](https://goutte.itch.io/mu) est un jeu de stratégie combinatoire abstrait conçu lors d'une courte jam, pour pouvoir y jouer avec mon père, qui m'a offert le livre dédicacé de M. Lheureux.
-> <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i><i class="icon-linux" title="Compatible Linux" aria-label="Compatible Linux"></i><i class="icon-windows" title="Compatible Windows" aria-label="Compatible Windows"></i><i class="icon-opensource" title="Open Source" aria-label="Open Source"></i>
+> [[html5]] [[linux]] [[windows]] [[apple]] [[opensource]]
 
 ---
 
-<a href="https://goutte.itch.io/octron-mania" target="blank">
+<a href="https://goutte.itch.io/octron-mania" target="_blank">
     <img src="../img/octron-mania.png" alt="Octron Mania ; A truncated octahedron character with a rainbow trail jumping around on generated terrain, made of thousands of truncated octahedra." title="Octron Mania" />
 </a>
 
 > [Octron Mania](https://goutte.itch.io/octron-mania) est un jeu à patounes conçu en quelques heures avec un ami dans un instant de convivialité, pour tester le moteur d'octaèdres tronqués que je fabrique pour un autre jeu.
-> <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i><i class="icon-linux" title="Compatible Linux" aria-label="Compatible Linux"></i><i class="icon-windows" title="Compatible Windows" aria-label="Compatible Windows"></i><i class="icon-opensource" title="Open Source" aria-label="Open Source"></i>
+> [[html5]] [[linux]] [[windows]] [[apple]] [[opensource]]
 
 ---
 
-<a href="https://antoine.goutenoir.com/games/cyx" target="blank">
+<a href="https://antoine.goutenoir.com/games/cyx" target="_blank">
     <img src="../img/cyx.png" alt="Cyx ; une sphère géodesique en nid d'abeille sur laquelle on joue à une sorte de morpion avec plusieurs solutions." title="Jouer à Cyx" />
 </a>
 
 > [Cyx](https://antoine.goutenoir.com/games/cyx) est un jeu de stratégie combinatoire abstrait, conçu pour recycler le plateau de jeu en géode créé à la base pour un jeu de Go.  Merci à [Kiouze](https://qze.fr) pour le logo et la bannière !
-> <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i>
+> [[html5]]
 
 ---
 
-<a href="https://antoine.goutenoir.com/games/nanogodo" target="blank">
+<a href="https://antoine.goutenoir.com/games/nanogodo" target="_blank">
     <img src="../img/nanogodo.png" alt="Nanogodo ; " title="Jouer à Nanogodo" />
 </a>
 
 > [Nanogodo](https://antoine.goutenoir.com/games/nanogodo) est un jeu d'usine inachevé, conçu pour apprendre Godot lors d'une auto-formation d'un mois.  C'est un clone de _Factorio_, mais avec un pavage hexagonal et les éléments du tableau périodique.
-> <i class="icon-html5" title="Compatible HTML5" aria-label="Compatible HTML5"></i><i class="icon-linux" title="Compatible Linux" aria-label="Compatible Linux"></i><i class="icon-windows" title="Compatible Windows" aria-label="Compatible Windows"></i><i class="icon-opensource" title="Open Source" aria-label="Open Source"></i>
+> [[html5]] [[linux]] [[windows]] [[opensource]]
 
 ---
 
