@@ -9,8 +9,8 @@ define('GP_PAGE_REGEX', '[a-zA-Z0-9_-]+'); // NEVER allow directory separators !
 define('GP_URL_REGEX', 'https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
 
 $icons = [
-    'python'     => ["Made with Python"],
-    'php'        => ["Made with PHP"],
+    'python'     => ["Réalisé en Python"],
+    'php'        => ["Réalisé en PHP"],
     'html5'      => ["Compatible HTML5"],
     'linux'      => ["Compatible Linux"],
     'windows'    => ["Compatible Windows"],
@@ -105,7 +105,7 @@ if ( ! is_localhost()) {
 }
 $twig = new Twig_Environment($twig_loader, $twig_config);
 
-$twig_epicene_function = new TwigFunction('epicene', function () use ($genre) {
+$twig_fn_epicene = new TwigFunction('epicene', function () use ($genre) {
     $args = func_get_args();
     $amount_of_args = count($args);
 
@@ -131,7 +131,7 @@ $twig_epicene_function = new TwigFunction('epicene', function () use ($genre) {
 
     return "Not implemented (yet).";
 });
-$twig->addFunction($twig_epicene_function);
+$twig->addFunction($twig_fn_epicene);
 
 
 // Route : Aliases /////////////////////////////////////////////////////////////
@@ -143,7 +143,8 @@ $app->get('/', function(Application $app) {
 
 // Route : Show a Page in the Story ////////////////////////////////////////////
 
-$app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre, $icons) {
+$app->get('/page/{id}', function (Application $app, $id)
+use ($twig, $genre, $icons) {
 
     // Grab the source file contents, or 404
     $source = get_page($id);
@@ -174,14 +175,35 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre, $ic
         'e' => ($genre == 0) ? 'e' : '',
     ));
 
-    // Convert talk links to external pages
+    // Convert external pages choice links like `(https://…)> Play` to
     $source = preg_replace_callback(
         '!^\((?P<url>'.GP_URL_REGEX.')\)\s*>\s*(?P<anchor>.+?)$!m',
         function ($m) use ($id) {
-            return '&#11166; <a class="talk" href="'.$m['url'].'" target="_blank">'.
+            return '&#11166; <a class="choice" href="'.$m['url'].'" target="_blank">'.
                 $m['anchor'] .
                 '</a><br>'
                 ;
+        },
+        $source
+    );
+
+    // Convert internal pages choice links like `(1)> Antichamber` to
+    $source = preg_replace_callback(
+        '!^\(('.GP_PAGE_REGEX.')(#[a-zA-z0-9_-]*|)\)\s*>\s*(.+?)(</p>)?$!m',
+        function ($m) use ($id) {
+            if (is_page($m[1])) {
+                if ($m[1] != $id) {
+                    return '&#11166; <a class="choice" href="../page/'.$m[1].$m[2].'">'.
+                        $m[3].
+                        '</a><br>'.
+                        ((isset($m[4])) ? '</p>' : '');
+                } else {
+                    return '';
+                }
+            } else {
+                return '&#11166; <a class="choice todo" href="#">'.$m[3].'</a><br>'.
+                    ((isset($m[4])) ? '</p>' : '');
+            }
         },
         $source
     );
@@ -200,32 +222,11 @@ $app->get('/page/{id}', function (Application $app, $id) use ($twig, $genre, $ic
     // Transform the markdown
     $page = $markdownParser->transform($source);
 
-    // Transform page links
+    // Transform page links in plain text, like `Go to page 1`
     $page = preg_replace_callback('!page ('.GP_PAGE_REGEX.')!', function ($m) {
         if (is_page($m[1])) return '<a href="../page/'.$m[1].'">'.$m[0].'</a>';
         else                return $m[0];
     }, $page);
-
-    // Transform dialogue links `(xxx)> blablabla`
-    $page = preg_replace_callback(
-        '!\s*\(('.GP_PAGE_REGEX.')(#[a-zA-z0-9_-]*|)\)\s*>\s*(.+?)(</p>)?$!m',
-        function ($m) use ($id) {
-            if (is_page($m[1])) {
-                if ($m[1] != $id) {
-                    return '&#11166; <a class="talk" href="../page/'.$m[1].$m[2].'">'.
-                           $m[3].
-                           '</a><br>'.
-                           ((isset($m[4])) ? '</p>' : '');
-                } else {
-                    return '';
-                }
-            } else {
-                return '&#11166; <a class="talk todo" href="#">'.$m[3].'</a><br>'.
-                       ((isset($m[4])) ? '</p>' : '');
-            }
-        },
-        $page
-    );
 
     return $twig->render('page.html.twig', array(
         'page' => $page,

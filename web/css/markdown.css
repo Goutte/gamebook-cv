@@ -1,6 +1,6 @@
 
 :root {
-    --bg-color: #222;
+    --bg-color: #1a1c1d;
     --text-color: #ddd;
     --link-color: #86d9ff;
     --link-hover-color: #baeaff;
@@ -81,7 +81,7 @@ a:visited:hover {
     color: var(--link-visited-hover-color);
 }
 
-a.talk {
+a.choice {
     text-decoration: none;
 }
 
